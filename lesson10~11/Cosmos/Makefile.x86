@@ -1,0 +1,23 @@
+###################################################################
+#		主控自动化编译配置文件 Makefile			  #
+#				彭东    #
+###################################################################
+
+MAKEFLAGS = -sR
+
+MKDIR = mkdir
+RMDIR = rmdir
+CP = cp
+CD = cd
+DD = dd
+RM = rm
+MAKE = make
+
+BUILD_PATH = ./build/
+LMINITLDR_PATH =./initldr/
+
+build: all
+
+all:
+	$(CD) $(LMINITLDR_PATH) && $(MAKE)
+	@echo '恭喜我，系统编译构建完成！ ^_^'
