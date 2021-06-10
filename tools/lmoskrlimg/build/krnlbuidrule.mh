@@ -1,0 +1,14 @@
+###################################################################
+#		krnlbuidrule自动化编译配置文件 Makefile		  #
+#				彭东  ＠ 2012.08.15.09.00	  #
+###################################################################
+
+CCSTR		= 	'CC -[M] 正在构建... '$<
+PRINTCSTR 	=	@echo $(CCSTR) 
+
+%.o : $(CCBUILDPATH)%.c
+	$(CC) $(CFLAGS) -o $@ $<
+	$(PRINTCSTR)
+%.mh : $(CCBUILDPATH)%.S
+	$(CC) $(CPPFLGSLDS) -o $@ $<
+	$(PRINTCSTR)

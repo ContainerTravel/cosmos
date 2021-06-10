@@ -1,0 +1,42 @@
+#ifndef _IMGCORE_H
+#define _IMGCORE_H
+void init_imgcore();
+void exit_imgcore();
+void limg_core();
+void limg_boot_mode_run();
+void limg_krnl_mode_run();
+void limg_ldsk_mode_run();
+void limg_undo_mode_run();
+void limg_core_in_mode_run(uint_t mode);
+sint_t limg_write_mlosrddsc();
+sint_t limg_write_ldrheadfile();
+int limg_write_imginitblk();
+void limg_config_subzn(fzone_t* fznp,uint_t fstartpos,uint_t fcurrepos,uint_t fendpos);
+void limg_config_fzone();
+void kankan();
+void limg_write_bldrzn();
+void limg_write_mftlzn();
+void limg_write_filezn();
+void limg_set_mlosrddsccurrpos(binfhead_t* bfhp);
+void limg_upd_mlosrddsccurrpos(binfhead_t* bfhp);
+void limg_set_ldrfilecurrpos(binfhead_t* bfhp);
+void limg_upd_ldrfilecurrpos(binfhead_t* bfhp);
+void limg_set_infilecurrpos(binfhead_t* bfhp);
+uint_t limg_ret_infilecurrpos();
+void limg_upd_infilecurrpos(binfhead_t* bfhp);
+void limg_set_fheadcurrpos(binfhead_t* bfhp);
+void limg_upd_fheadcurrpos(binfhead_t* bfhp);
+int limg_rw_bldr_file(binfhead_t* ibfhp,binfhead_t* obfhp);
+int limg_rw_one_file(binfhead_t* ibfhp,binfhead_t* obfhp);
+sint_t run_rw_func_onldfile(char* pathname);
+sint_t run_rw_func_oninfile(char* pathname);
+void del_outimg_file();
+void new_outimg_file();
+int alloc_new_inputfile(char* pathname,binfhead_t* inpbfhp);
+uint_t computer_sum(void* buf,uint_t sz);
+int free_new_inputfile(binfhead_t* inpbfhp);
+void read_imgfile_to_buf(binfhead_t* bfhdp);
+void copy_infbuf_to_oufbuf(binfhead_t* ibfhdp,binfhead_t* obfhdp);
+void write_imgfile_fr_buf(binfhead_t* bfhdp);
+int open_newoutimgfile(char* pathname);
+#endif
