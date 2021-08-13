@@ -1,0 +1,35 @@
+MAKEFLAGS = -sR
+.PHONY : all moutvmhd clean idectrnul crtidectr dbugvm stratvm tranvdi moutraw
+
+all: moutraw tranvdi idectrnul crtidectr moutvmhd stratvm
+
+dbg: moutraw tranvdi idectrnul crtidectr moutvmhd dbugvm
+
+createvm:
+	VBoxManage createvm --name Cosmos -register
+
+crtidectr:
+	VBoxManage storagectl Cosmos --name "IDE" --add ide --controller PIIX4
+
+idectrnul:
+	VBoxManage storagectl Cosmos --name "IDE" --remove 
+
+moutvmhd:
+	VBoxManage closemedium disk ../exckrnl/hd.vdi
+	VBoxManage storageattach Cosmos --storagectl "IDE" --port 0 --device 0 --type hdd --medium ../exckrnl/hd.vdi
+	
+stratvm:
+	VBoxManage startvm Cosmos
+
+dbugvm:
+	VirtualBoxVM --startvm Cosmos --debug
+
+tranvdi:
+	VBoxManage convertfromraw ../hd.img --format VDI ../exckrnl/hd.vdi
+
+moutraw:
+	sudo mount -o loop ../hd.img ../hdisk/
+	sudo cp ../release/Cosmos.eki ../hdisk/boot/
+	sudo umount ../hdisk/
+
+# --putenv VBOX_GUI_DBG_ENABLED=ture	
